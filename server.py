@@ -1,9 +1,14 @@
-from flask import Flask
-server = Flask(__name__)
+from flask import Flask, request,jsonify
+from threading import Thread
 
-@server.route("/")
-def hello():
-    return "Hello World!"
+app = Flask('')
 
-if __name__ == "__main__":
-   server.run(host='0.0.0.0', port=1337)
+@app.route('/')
+def main():
+    return "I'm alive!"
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+def keep_alive():
+    server = Thread(target=run)
+    server.start()
